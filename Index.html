@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kim's Teriyaki | Authentic Japanese Teriyaki in Kent, WA</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cormorant Garamond for elegant Japanese-inspired serif headings & Plus Jakarta Sans for crisp readability -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for clean icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: {
+                            50: '#FDFBF7',
+                            100: '#F9F5EB',
+                            200: '#F0E7D5',
+                            300: '#E2D4B7',
+                        },
+                        sumi: {
+                            950: '#0F0E0E',
+                            900: '#181615',
+                            800: '#262322',
+                            700: '#3D3836',
+                        },
+                        aka: {
+                            500: '#C8232C',
+                            600: '#A91B22',
+                            700: '#881319',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-cream-100 text-sumi-900 font-sans antialiased selection:bg-aka-600 selection:text-cream-50">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-sumi-950 text-cream-200 text-xs sm:text-sm py-2 px-4 text-center border-b border-sumi-800">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-1">
+            <span><i class="fa-solid fa-location-dot text-aka-500 mr-1.5"></i>841 Central Ave N #101, Kent, WA 98032</span>
+            <span class="hidden md:inline text-cream-300/60">•</span>
+            <span><i class="fa-solid fa-fire text-aka-500 mr-1.5"></i>Freshly Charbroiled to Order — Dine-In & Takeout</span>
+            <a href="tel:2538540667" class="hover:text-aka-500 transition-colors font-medium">
+                <i class="fa-solid fa-phone text-aka-500 mr-1.5"></i>(253) 854-0667
+            </a>
+        </div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 bg-cream-100/95 backdrop-blur-md border-b border-cream-300/80 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-11 h-11 rounded-xl bg-aka-600 flex flex-col items-center justify-center text-cream-50 shadow-md group-hover:bg-aka-700 transition-colors border border-aka-500">
+                        <span class="font-serif text-xl font-bold leading-none">照焼</span>
+                    </div>
+                    <div>
+                        <span class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-sumi-950 block leading-none">Kim’s Teriyaki</span>
+                        <span class="text-[11px] uppercase tracking-[0.2em] text-aka-600 font-semibold block mt-0.5">Kent • Washington</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#menu" class="text-sumi-800 hover:text-aka-600 font-medium transition-colors">Menu</a>
+                    <a href="#about" class="text-sumi-800 hover:text-aka-600 font-medium transition-colors">Our Story</a>
+                    <a href="#location" class="text-sumi-800 hover:text-aka-600 font-medium transition-colors">Hours & Location</a>
+                    <a href="#contact" class="text-sumi-800 hover:text-aka-600 font-medium transition-colors">Contact</a>
+                </nav>
+
+                <!-- CTA & Mobile Menu Toggle -->
+                <div class="flex items-center gap-3">
+                    <button onclick="openOrderModal()" class="bg-aka-600 hover:bg-aka-700 text-cream-50 font-semibold px-5 py-2.5 rounded-xl shadow-md hover:shadow-lg transition-all flex items-center gap-2 text-sm sm:text-base cursor-pointer">
+                        <span>Order Online</span>
+                        <span id="nav-cart-badge" class="hidden bg-sumi-950 text-cream-50 text-xs font-bold px-2 py-0.5 rounded-full">0</span>
+                    </button>
+                    <button id="mobile-menu-btn" aria-label="Toggle Menu" class="md:hidden p-2.5 rounded-xl text-sumi-900 hover:bg-cream-200 transition-colors">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden bg-cream-50 border-b border-cream-300 px-4 pt-2 pb-6 space-y-2 shadow-lg">
+            <a href="#menu" onclick="closeMobileMenu()" class="block px-4 py-3 rounded-xl text-base font-medium text-sumi-900 hover:bg-cream-200">Menu</a>
+            <a href="#about" onclick="closeMobileMenu()" class="block px-4 py-3 rounded-xl text-base font-medium text-sumi-900 hover:bg-cream-200">Our Story</a>
+            <a href="#location" onclick="closeMobileMenu()" class="block px-4 py-3 rounded-xl text-base font-medium text-sumi-900 hover:bg-cream-200">Hours & Location</a>
+            <a href="#contact" onclick="closeMobileMenu()" class="block px-4 py-3 rounded-xl text-base font-medium text-sumi-900 hover:bg-cream-200">Contact</a>
+            <div class="pt-2">
+                <a href="tel:2538540667" class="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-sumi-900 text-cream-50 font-medium">
+                    <i class="fa-solid fa-phone text-aka-500"></i> Call (253) 854-0667
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section with Large Teriyaki Chicken Food Photography -->
+    <section class="relative bg-sumi-950 text-cream-50 overflow-hidden">
+        <!-- Background Image & Dark Gradient Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img 
+                src="https://images.unsplash.com/photo-1598514983318-2f64f8f4796c?auto=format&fit=crop&w=1920&q=85" 
+                onerror="this.onerror=null; this.src='https://placehold.co/1920x1080/181615/F9F5EB?text=Flame-Grilled+Chicken+Teriyaki';"
+                alt="Glazed Charbroiled Chicken Teriyaki with steamed rice and sesame seeds" 
+                class="w-full h-full object-cover object-center opacity-55 scale-105"
+            >
+            <div class="absolute inset-0 bg-gradient-to-r from-sumi-950 via-sumi-950/85 to-sumi-950/30"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-sumi-950 via-transparent to-sumi-950/40"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-6">
+                    <!-- Japanese Hanko Stamp Badge -->
+                    <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-sumi-900/90 border border-aka-600/60 text-cream-100 text-xs sm:text-sm font-medium tracking-wide">
+                        <span class="w-2 h-2 rounded-full bg-aka-500 animate-pulse"></span>
+                        <span>Kent’s Favorite Seattle-Style Teriyaki</span>
+                    </div>
+
+                    <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold leading-[1.08] tracking-tight text-cream-50">
+                        Charbroiled Perfection, <br>
+                        <span class="text-aka-500 italic">Glazed in Tradition.</span>
+                    </h1>
+
+                    <p class="text-cream-200/90 text-base sm:text-lg lg:text-xl max-w-2xl leading-relaxed font-normal">
+                        Tender, flame-grilled Chicken Teriyaki brushed with our house-simmered sweet soy glaze, served alongside fluffy steamed white rice and crisp sesame-dressed salad.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 pt-3">
+                        <button onclick="openOrderModal()" class="bg-aka-600 hover:bg-aka-700 text-cream-50 font-semibold px-8 py-4 rounded-xl shadow-xl shadow-aka-900/30 transition-all flex items-center justify-center gap-3 text-base sm:text-lg cursor-pointer">
+                            <span>Order Online Now</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                        <a href="#menu" class="bg-cream-50/10 hover:bg-cream-50/20 backdrop-blur-sm border border-cream-200/30 text-cream-50 font-semibold px-8 py-4 rounded-xl transition-all flex items-center justify-center gap-2 text-base sm:text-lg">
+                            <span>Explore Menu</span>
+                        </a>
+                    </div>
+
+                    <!-- Quick Trust Indicators -->
+                    <div class="pt-6 grid grid-cols-3 gap-4 max-w-lg border-t border-cream-200/15">
+                        <div>
+                            <p class="font-serif text-2xl sm:text-3xl font-bold text-cream-50">100%</p>
+                            <p class="text-xs sm:text-sm text-cream-300">Charbroiled Fresh</p>
+                        </div>
+                        <div>
+                            <p class="font-serif text-2xl sm:text-3xl font-bold text-cream-50">House</p>
+                            <p class="text-xs sm:text-sm text-cream-300">Signature Glaze</p>
+                        </div>
+                        <div>
+                            <p class="font-serif text-2xl sm:text-3xl font-bold text-cream-50">Fast</p>
+                            <p class="text-xs sm:text-sm text-cream-300">Kent Pickup</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Featured Hero Showcase Card (Desktop & Tablet) -->
+                <div class="lg:col-span-5">
+                    <div class="bg-sumi-900/90 backdrop-blur-md border border-cream-200/15 rounded-2xl p-4 sm:p-5 shadow-2xl">
+                        <div class="relative rounded-xl overflow-hidden aspect-[4/3] mb-4">
+                            <img 
+                                src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=900&q=85" 
+                                onerror="this.onerror=null; this.src='https://placehold.co/800x600/262322/F9F5EB?text=Signature+Chicken+Teriyaki';"
+                                alt="Close-up of Kim's Signature Chicken Teriyaki Plate" 
+                                class="w-full h-full object-cover"
+                            >
+                            <div class="absolute top-3 left-3 bg-aka-600 text-cream-50 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-lg shadow">
+                                #1 Best Seller
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-start gap-4">
+                            <div>
+                                <h3 class="font-serif text-2xl font-bold text-cream-50">Signature Chicken Teriyaki</h3>
+                                <p class="text-cream-300 text-sm mt-1">Marinated boneless chicken thighs flame-grilled & glazed, served with 2 scoops of rice & house salad.</p>
+                            </div>
+                            <span class="font-serif text-2xl font-bold text-aka-500 shrink-0">$13.99</span>
+                        </div>
+                        <button onclick="addToCart('Chicken Teriyaki', 13.99)" class="mt-4 w-full py-3 rounded-xl bg-cream-100 hover:bg-white text-sumi-950 font-semibold text-sm transition-colors flex items-center justify-center gap-2 cursor-pointer">
+                            <i class="fa-solid fa-plus text-aka-600"></i>
+                            <span>Add to Pickup Order</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Restaurant Menu Section -->
+    <section id="menu" class="py-20 sm:py-28 bg-cream-100 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <div class="inline-flex items-center gap-2 text-aka-600 font-semibold text-xs uppercase tracking-[0.25em] mb-3">
+                    <span class="w-6 h-[1px] bg-aka-600"></span>
+                    <span>お品書き • Our Menu</span>
+                    <span class="w-6 h-[1px] bg-aka-600"></span>
+                </div>
+                <h2 class="font-serif text-4xl sm:text-5xl font-bold text-sumi-950 mb-4">Crafted Over Open Flame</h2>
+                <p class="text-sumi-700 text-base sm:text-lg">
+                    Every plate is cooked to order and served with steamed white rice and crisp green salad tossed in our creamy sesame dressing.
+                </p>
+            </div>
+
+            <!-- Category Filter Pills -->
+            <div class="flex flex-wrap justify-center gap-2.5 sm:gap-3 mb-12" id="menu-filters">
+                <button data-filter="all" class="filter-btn active px-5 py-2.5 rounded-xl text-sm font-semibold bg-sumi-950 text-cream-50 shadow-sm transition-all cursor-pointer">
+                    All Favorites
+                </button>
+                <button data-filter="teriyaki" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-semibold bg-cream-50 text-sumi-800 border border-cream-300 hover:border-sumi-900 transition-all cursor-pointer">
+                    Charbroiled Teriyaki
+                </button>
+                <button data-filter="katsu" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-semibold bg-cream-50 text-sumi-800 border border-cream-300 hover:border-sumi-900 transition-all cursor-pointer">
+                    Crispy Katsu
+                </button>
+                <button data-filter="sides" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-semibold bg-cream-50 text-sumi-800 border border-cream-300 hover:border-sumi-900 transition-all cursor-pointer">
+                    Gyoza & Sides
+                </button>
+            </div>
+
+            <!-- Featured Signature Dishes Grid (Highlighting Chicken Teriyaki, Beef Teriyaki, Chicken Katsu, Gyoza) -->
+            <div id="menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-7">
+                
+                <!-- Item 1: Chicken Teriyaki -->
+                <div data-category="teriyaki" class="menu-card bg-cream-50 rounded-2xl overflow-hidden border border-cream-300/90 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="relative h-56 overflow-hidden bg-sumi-900">
+                            <img 
+                                src="https://images.unsplash.com/photo-1598514983318-2f64f8f4796c?auto=format&fit=crop&w=800&q=80" 
+                                onerror="this.onerror=null; this.src='https://placehold.co/600x450/262322/F9F5EB?text=Chicken+Teriyaki';"
+                                alt="Chicken Teriyaki" 
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            >
+                            <span class="absolute top-3 left-3 bg-aka-600 text-cream-50 text-xs font-bold px-3 py-1 rounded-lg shadow">
+                                House Signature
+                            </span>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-baseline gap-2 mb-2">
+                                <h3 class="font-serif text-2xl font-bold text-sumi-950">Chicken Teriyaki</h3>
+                                <span class="font-bold text-lg text-aka-600">$13.99</span>
+                            </div>
+                            <p class="text-sumi-700 text-sm leading-relaxed">
+                                Juicy boneless chicken marinated overnight and flame-broiled with our signature house teriyaki glaze. Served with steamed rice & house salad.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6">
+                        <button onclick="addToCart('Chicken Teriyaki', 13.99)" class="w-full py-3 rounded-xl bg-sumi-950 hover:bg-aka-600 text-cream-50 font-semibold text-sm transition-colors flex items-center justify-center gap-2 cursor-pointer">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Add to Order</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Item 2: Beef Teriyaki -->
+                <div data-category="teriyaki" class="menu-card bg-cream-50 rounded-2xl overflow-hidden border border-cream-300/90 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="relative h-56 overflow-hidden bg-sumi-900">
+                            <img 
+                                src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" 
+                                onerror="this.onerror=null; this.src='https://placehold.co/600x450/262322/F9F5EB?text=Beef+Teriyaki';"
+                                alt="Beef Teriyaki" 
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            >
+                            <span class="absolute top-3 left-3 bg-sumi-950/85 text-cream-100 text-xs font-semibold px-3 py-1 rounded-lg">
+                                Savory & Tender
+                            </span>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-baseline gap-2 mb-2">
+                                <h3 class="font-serif text-2xl font-bold text-sumi-950">Beef Teriyaki</h3>
+                                <span class="font-bold text-lg text-aka-600">$15.99</span>
+                            </div>
+                            <p class="text-sumi-700 text-sm leading-relaxed">
+                                Thinly sliced prime beef marinated in garlic, ginger, and soy, seared over high heat and finished with toasted sesame seeds.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6">
+                        <button onclick="addToCart('Beef Teriyaki', 15.99)" class="w-full py-3 rounded-xl bg-sumi-950 hover:bg-aka-600 text-cream-50 font-semibold text-sm transition-colors flex items-center justify-center gap-2 cursor-pointer">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Add to Order</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Item 3: Chicken Katsu -->
+                <div data-category="katsu" class="menu-card bg-cream-50 rounded-2xl overflow-hidden border border-cream-300/90 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="relative h-56 overflow-hidden bg-sumi-900">
+                            <img 
+                                src="https://images.unsplash.com/photo-1604908177453-7462950a6a3b?auto=format&fit=crop&w=800&q=80" 
+                                onerror="this.onerror=null; this.src='https://placehold.co/600x450/262322/F9F5EB?text=Chicken+Katsu';"
+                                alt="Chicken Katsu" 
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            >
+                            <span class="absolute top-3 left-3 bg-sumi-950/85 text-cream-100 text-xs font-semibold px-3 py-1 rounded-lg">
+                                Golden Panko
+                            </span>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-baseline gap-2 mb-2">
+                                <h3 class="font-serif text-2xl font-bold text-sumi-950">Chicken Katsu</h3>
+                                <span class="font-bold text-lg text-aka-600">$14.99</span>
+                            </div>
+                            <p class="text-sumi-700 text-sm leading-relaxed">
+                                Crisp Japanese panko-breaded chicken cutlet fried to a golden crunch, sliced and drizzled with tangy-sweet tonkatsu sauce.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6">
+                        <button onclick="addToCart('Chicken Katsu', 14.99)" class="w-full py-3 rounded-xl bg-sumi-950 hover:bg-aka-600 text-cream-50 font-semibold text-sm transition-colors flex items-center justify-center gap-2 cursor-pointer">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Add to Order</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Item 4: Gyoza -->
+                <div data-category="sides" class="menu-card bg-cream-50 rounded-2xl overflow-hidden border border-cream-300/90 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="relative h-56 overflow-hidden bg-sumi-900">
+                            <img 
+                                src="https://images.unsplash.com/photo-1496116218417-1a781b1c416c?auto=format&fit=crop&w=800&q=80" 
+                                onerror="this.onerror=null; this.src='https://placehold.co/600x450/262322/F9F5EB?text=Crispy+Gyoza';"
+                                alt="Pan-Fried Gyoza" 
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            >
+                            <span class="absolute top-3 left-3 bg-aka-600 text-cream-50 text-xs font-bold px-3 py-1 rounded-lg shadow">
+                                8 Pieces
+                            </span>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-baseline gap-2 mb-2">
+                                <h3 class="font-serif text-2xl font-bold text-sumi-950">Gyoza (8 pcs)</h3>
+                                <span class="font-bold text-lg text-aka-600">$7.99</span>
+                            </div>
+                            <p class="text-sumi-700 text-sm leading-relaxed">
+                                Pan-seared pork and vegetable dumplings with delicate, crispy lace bottoms. Served warm with our house citrus-soy dipping sauce.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6">
+                        <button onclick="addToCart('Gyoza (8 pcs)', 7.99)" class="w-full py-3 rounded-xl bg-sumi-950 hover:bg-aka-600 text-cream-50 font-semibold text-sm transition-colors flex items-center justify-center gap-2 cursor-pointer">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Add to Order</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Additional Classic Menu Items for a Complete Restaurant Menu -->
+                <div data-category="teriyaki" class="menu-card bg-cream-50 rounded-2xl p-6 border border-cream-300/90 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-baseline gap-2 mb-2">
+                            <h3 class="font-serif text-xl font-bold text-sumi-950">Spicy Chicken Teriyaki</h3>
+                            <span class="font-bold text-aka-600">$14.49</span>
+                        </div>
+                        <p class="text-sumi-700 text-sm leading-relaxed mb-4">
+                            Our signature charbroiled chicken tossed in a fiery house chili-garlic teriyaki glaze for a bold kick.
+                        </p>
+                    </div>
+                    <button onclick="addToCart('Spicy Chicken Teriyaki', 14.49)" class="w-full py-2.5 rounded-xl border border-sumi-900 text-sumi-950 hover:bg-sumi-950 hover:text-cream-50 font-semibold text-sm transition-colors cursor-pointer">
+                        + Add to Order
+                    </button>
+                </div>
+
+                <div data-category="teriyaki" class="menu-card bg-cream-50 rounded-2xl p-6 border border-cream-300/90 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-baseline gap-2 mb-2">
+                            <h3 class="font-serif text-xl font-bold text-sumi-950">Chicken & Beef Combo</h3>
+                            <span class="font-bold text-aka-600">$16.99</span>
+                        </div>
+                        <p class="text-sumi-700 text-sm leading-relaxed mb-4">
+                            Generous portions of both flame-grilled Chicken Teriyaki and savory Beef Teriyaki with rice and salad.
+                        </p>
+                    </div>
+                    <button onclick="addToCart('Chicken & Beef Combo', 16.99)" class="w-full py-2.5 rounded-xl border border-sumi-900 text-sumi-950 hover:bg-sumi-950 hover:text-cream-50 font-semibold text-sm transition-colors cursor-pointer">
+                        + Add to Order
+                    </button>
+                </div>
+
+                <div data-category="katsu" class="menu-card bg-cream-50 rounded-2xl p-6 border border-cream-300/90 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-baseline gap-2 mb-2">
+                            <h3 class="font-serif text-xl font-bold text-sumi-950">Chicken & Gyoza Plate</h3>
+                            <span class="font-bold text-aka-600">$15.49</span>
+                        </div>
+                        <p class="text-sumi-700 text-sm leading-relaxed mb-4">
+                            Classic Chicken Teriyaki paired with 4 crispy pan-fried Gyoza, steamed white rice, and house salad.
+                        </p>
+                    </div>
+                    <button onclick="addToCart('Chicken & Gyoza Plate', 15.49)" class="w-full py-2.5 rounded-xl border border-sumi-900 text-sumi-950 hover:bg-sumi-950 hover:text-cream-50 font-semibold text-sm transition-colors cursor-pointer">
+                        + Add to Order
+                    </button>
+                </div>
+
+                <div data-category="sides" class="menu-card bg-cream-50 rounded-2xl p-6 border border-cream-300/90 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-baseline gap-2 mb-2">
+                            <h3 class="font-serif text-xl font-bold text-sumi-950">Crispy Egg Rolls (4 pcs)</h3>
+                            <span class="font-bold text-aka-600">$6.49</span>
+                        </div>
+                        <p class="text-sumi-700 text-sm leading-relaxed mb-4">
+                            Golden-fried vegetable and pork spring rolls served piping hot with sweet chili dipping sauce.
+                        </p>
+                    </div>
+                    <button onclick="addToCart('Crispy Egg Rolls (4 pcs)', 6.49)" class="w-full py-2.5 rounded-xl border border-sumi-900 text-sumi-950 hover:bg-sumi-950 hover:text-cream-50 font-semibold text-sm transition-colors cursor-pointer">
+                        + Add to Order
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section (Japanese-Inspired Black & Cream Split) -->
+    <section id="about" class="py-20 sm:py-28 bg-sumi-950 text-cream-50 relative overflow-hidden">
+        <!-- Subtle Decorative Japanese Vertical Line Pattern -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                
+                <!-- Left Image Collage -->
+                <div class="lg:col-span-6 relative">
+                    <div class="rounded-2xl overflow-hidden border border-cream-200/15 shadow-2xl">
+                        <img 
+                            src="https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=1000&q=85" 
+                            onerror="this.onerror=null; this.src='https://placehold.co/900x700/262322/F9F5EB?text=Authentic+Japanese+Craft';"
+                            alt="Japanese Culinary Preparation at Kim's Teriyaki" 
+                            class="w-full h-[380px] sm:h-[460px] object-cover"
+                        >
+                    </div>
+                    <!-- Floating Hanko Quote Card -->
+                    <div class="mt-6 sm:mt-0 sm:absolute sm:-bottom-6 sm:-right-6 bg-aka-600 text-cream-50 p-6 rounded-2xl shadow-xl max-w-xs border border-aka-500">
+                        <p class="font-serif italic text-xl leading-snug">
+                            “Great teriyaki starts with patience—slow-simmered glaze, real charbroil flame, and generous hospitality.”
+                        </p>
+                        <p class="text-xs uppercase tracking-widest mt-3 text-cream-200 font-semibold">— Kim’s Family Kitchen</p>
+                    </div>
+                </div>
+
+                <!-- Right Story Content -->
+                <div class="lg:col-span-6 space-y-6">
+                    <div class="inline-flex items-center gap-2 text-aka-500 font-semibold text-xs uppercase tracking-[0.25em]">
+                        <span>心 • Our Story</span>
+                    </div>
+                    <h2 class="font-serif text-4xl sm:text-5xl font-bold text-cream-50 leading-tight">
+                        Bringing Heartfelt Teriyaki to the Kent Community
+                    </h2>
+                    <p class="text-cream-200/90 text-base sm:text-lg leading-relaxed">
+                        Located on Central Avenue North in the heart of Kent, Washington, <strong class="text-cream-50">Kim’s Teriyaki</strong> is dedicated to the authentic Pacific Northwest teriyaki tradition. We believe comfort food should never cut corners.
+                    </p>
+                    <p class="text-cream-300/85 text-base leading-relaxed">
+                        Each morning, we prepare our signature teriyaki sauce from scratch—balancing aged soy, ginger, garlic, and natural sweetness—and marinate premium cuts of chicken and beef so every bite caramelizes beautifully over our open grill.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-4">
+                        <div class="bg-sumi-900 border border-sumi-800 p-5 rounded-2xl">
+                            <div class="w-10 h-10 rounded-xl bg-aka-600/20 text-aka-500 flex items-center justify-center mb-3">
+                                <i class="fa-solid fa-fire-flame-curved text-lg"></i>
+                            </div>
+                            <h4 class="font-serif text-xl font-bold text-cream-50 mb-1">Open-Flame Charbroil</h4>
+                            <p class="text-sm text-cream-300">Smoky, caramelized edges with tender, juicy centers on every order.</p>
+                        </div>
+                        <div class="bg-sumi-900 border border-sumi-800 p-5 rounded-2xl">
+                            <div class="w-10 h-10 rounded-xl bg-aka-600/20 text-aka-500 flex items-center justify-center mb-3">
+                                <i class="fa-solid fa-bowl-rice text-lg"></i>
+                            </div>
+                            <h4 class="font-serif text-xl font-bold text-cream-50 mb-1">Generous Portions</h4>
+                            <p class="text-sm text-cream-300">Hearty servings of steamed rice, crisp salad, and house-made dressing.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Location, Opening Hours & Contact Section -->
+    <section id="location" class="py-20 sm:py-28 bg-cream-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-14">
+                <div class="inline-flex items-center gap-2 text-aka-600 font-semibold text-xs uppercase tracking-[0.25em] mb-3">
+                    <span>店舗情報 • Visit Us</span>
+                </div>
+                <h2 class="font-serif text-4xl sm:text-5xl font-bold text-sumi-950 mb-4">Location & Opening Hours</h2>
+                <p class="text-sumi-700 text-base sm:text-lg">
+                    Conveniently located on Central Ave N in Kent with easy parking for quick lunch pickups and family dinners.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                
+                <!-- Hours & Contact Card -->
+                <div id="contact" class="lg:col-span-5 bg-cream-50 border border-cream-300 rounded-2xl p-6 sm:p-8 shadow-sm flex flex-col justify-between space-y-8">
+                    <div>
+                        <div class="flex items-center justify-between pb-4 border-b border-cream-300">
+                            <h3 class="font-serif text-2xl font-bold text-sumi-950">Opening Hours</h3>
+                            <span id="open-status-badge" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800">
+                                <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+                                Open Today
+                            </span>
+                        </div>
+
+                        <ul class="mt-5 space-y-3 text-sm sm:text-base">
+                            <li class="flex justify-between items-center py-1.5 border-b border-cream-200/80">
+                                <span class="font-medium text-sumi-800">Monday – Friday</span>
+                                <span class="font-semibold text-sumi-950">10:30 AM – 8:30 PM</span>
+                            </li>
+                            <li class="flex justify-between items-center py-1.5 border-b border-cream-200/80">
+                                <span class="font-medium text-sumi-800">Saturday</span>
+                                <span class="font-semibold text-sumi-950">11:00 AM – 8:30 PM</span>
+                            </li>
+                            <li class="flex justify-between items-center py-1.5">
+                                <span class="font-medium text-sumi-800">Sunday</span>
+                                <span class="font-semibold text-aka-600">Closed</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Contact & Address Details -->
+                    <div class="space-y-5 pt-4 border-t border-cream-300">
+                        <div class="flex items-start gap-4">
+                            <div class="w-11 h-11 rounded-xl bg-aka-600 text-cream-50 flex items-center justify-center shrink-0 shadow-sm">
+                                <i class="fa-solid fa-location-dot text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sumi-950 text-sm uppercase tracking-wider">Address</h4>
+                                <p class="text-sumi-800 font-medium mt-0.5">841 Central Ave N #101<br>Kent, WA 98032</p>
+                                <button onclick="copyAddress()" class="mt-1.5 text-xs font-semibold text-aka-600 hover:text-aka-700 inline-flex items-center gap-1.5 cursor-pointer">
+                                    <i class="fa-regular fa-copy"></i>
+                                    <span id="copy-address-text">Copy Address</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-11 h-11 rounded-xl bg-sumi-950 text-cream-50 flex items-center justify-center shrink-0 shadow-sm">
+                                <i class="fa-solid fa-phone text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sumi-950 text-sm uppercase tracking-wider">Phone Orders & Inquiries</h4>
+                                <a href="tel:2538540667" class="text-xl font-serif font-bold text-sumi-950 hover:text-aka-600 transition-colors block mt-0.5">
+                                    (253) 854-0667
+                                </a>
+                                <p class="text-xs text-sumi-700 mt-0.5">Call ahead for fast takeout pickup</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-2 flex flex-col sm:flex-row gap-3">
+                        <button onclick="openOrderModal()" class="flex-1 bg-aka-600 hover:bg-aka-700 text-cream-50 font-semibold py-3.5 px-5 rounded-xl text-center transition-colors shadow cursor-pointer">
+                            Order Online
+                        </button>
+                        <a href="https://www.google.com/maps/search/?api=1&query=841+Central+Ave+N+%23101+Kent+WA+98032" target="_blank" rel="noopener noreferrer" class="flex-1 bg-sumi-950 hover:bg-sumi-800 text-cream-50 font-semibold py-3.5 px-5 rounded-xl text-center transition-colors">
+                            Get Directions
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Interactive Map Embed -->
+                <div class="lg:col-span-7 bg-sumi-900 rounded-2xl overflow-hidden border border-cream-300 shadow-sm min-h-[380px] relative">
+                    <iframe 
+                        title="Map to Kim's Teriyaki at 841 Central Ave N #101, Kent, WA 98032"
+                        src="https://maps.google.com/maps?q=841%20Central%20Ave%20N%20%23101,%20Kent,%20WA%2098032&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                        class="w-full h-full min-h-[380px] border-0" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-sumi-950 text-cream-200 border-t border-sumi-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 pb-10 border-b border-sumi-800">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-aka-600 flex items-center justify-center text-cream-50 font-serif font-bold text-lg">
+                            照焼
+                        </div>
+                        <span class="font-serif text-2xl font-bold text-cream-50">Kim’s Teriyaki</span>
+                    </div>
+                    <p class="text-sm text-cream-300/80 leading-relaxed max-w-sm">
+                        Authentic charbroiled Japanese teriyaki, golden katsu, and crispy gyoza served fresh daily in Kent, Washington.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="font-serif text-lg font-bold text-cream-50 mb-4">Quick Links</h4>
+                    <ul class="space-y-2.5 text-sm text-cream-300">
+                        <li><a href="#menu" class="hover:text-aka-500 transition-colors">Full Menu</a></li>
+                        <li><a href="#about" class="hover:text-aka-500 transition-colors">Our Story</a></li>
+                        <li><a href="#location" class="hover:text-aka-500 transition-colors">Opening Hours</a></li>
+                        <li><button onclick="openOrderModal()" class="hover:text-aka-500 transition-colors cursor-pointer">Order Online</button></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-serif text-lg font-bold text-cream-50 mb-4">Visit & Call</h4>
+                    <p class="text-sm text-cream-300 mb-2">
+                        <i class="fa-solid fa-location-dot text-aka-500 mr-2"></i>
+                        841 Central Ave N #101, Kent, WA 98032
+                    </p>
+                    <p class="text-sm text-cream-300">
+                        <i class="fa-solid fa-phone text-aka-500 mr-2"></i>
+                        <a href="tel:2538540667" class="hover:text-cream-50 font-semibold">(253) 854-0667</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-cream-300/60 gap-4">
+                <p>&copy; <span id="current-year"></span> Kim’s Teriyaki Kent. All rights reserved.</p>
+                <p>841 Central Ave N #101, Kent, WA 98032 • (253) 854-0667</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification Message Box (Replaces any alert usage) -->
+    <div id="toast-box" class="fixed bottom-5 right-5 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-sumi-950 text-cream-50 border border-aka-600 px-5 py-3.5 rounded-xl shadow-2xl flex items-center gap-3">
+            <i class="fa-solid fa-circle-check text-aka-500 text-lg"></i>
+            <span id="toast-message" class="text-sm font-medium">Item added to your order!</span>
+        </div>
+    </div>
+
+    <!-- Interactive Online Ordering Modal -->
+    <div id="order-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-sumi-950/75 backdrop-blur-sm p-4">
+        <div class="bg-cream-50 border border-cream-300 rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
+            <!-- Modal Header -->
+            <div class="bg-sumi-950 text-cream-50 px-6 py-4 flex justify-between items-center">
+                <div>
+                    <h3 class="font-serif text-2xl font-bold">Pickup Order — Kim’s Teriyaki</h3>
+                    <p class="text-xs text-cream-300">841 Central Ave N #101, Kent, WA • Est. Ready in 15–20 mins</p>
+                </div>
+                <button onclick="closeOrderModal()" aria-label="Close Order Modal" class="w-9 h-9 rounded-xl bg-sumi-800 hover:bg-aka-600 text-cream-50 flex items-center justify-center transition-colors cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-6 overflow-y-auto space-y-5 flex-1">
+                <!-- Quick Add Bar -->
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-sumi-700 mb-2">Quick Add Favorites</label>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button onclick="addToCart('Chicken Teriyaki', 13.99)" class="text-left p-2.5 rounded-xl bg-cream-100 hover:bg-cream-200 border border-cream-300 text-xs font-semibold flex justify-between items-center cursor-pointer">
+                            <span>Chicken Teriyaki</span>
+                            <span class="text-aka-600">+$13.99</span>
+                        </button>
+                        <button onclick="addToCart('Beef Teriyaki', 15.99)" class="text-left p-2.5 rounded-xl bg-cream-100 hover:bg-cream-200 border border-cream-300 text-xs font-semibold flex justify-between items-center cursor-pointer">
+                            <span>Beef Teriyaki</span>
+                            <span class="text-aka-600">+$15.99</span>
+                        </button>
+                        <button onclick="addToCart('Chicken Katsu', 14.99)" class="text-left p-2.5 rounded-xl bg-cream-100 hover:bg-cream-200 border border-cream-300 text-xs font-semibold flex justify-between items-center cursor-pointer">
+                            <span>Chicken Katsu</span>
+                            <span class="text-aka-600">+$14.99</span>
+                        </button>
+                        <button onclick="addToCart('Gyoza (8 pcs)', 7.99)" class="text-left p-2.5 rounded-xl bg-cream-100 hover:bg-cream-200 border border-cream-300 text-xs font-semibold flex justify-between items-center cursor-pointer">
+                            <span>Gyoza (8 pcs)</span>
+                            <span class="text-aka-600">+$7.99</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Cart Items List -->
+                <div class="border-t border-cream-300 pt-4">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-sumi-700 mb-3">Your Order Summary</h4>
+                    <div id="cart-items-container" class="space-y-2.5">
+                        <!-- Dynamically populated via JS -->
+                    </div>
+                </div>
+
+                <!-- Customer Pickup Details Form -->
+                <form id="pickup-form" onsubmit="submitPickupOrder(event)" class="border-t border-cream-300 pt-4 space-y-3">
+                    <div>
+                        <label for="customer-name" class="block text-xs font-semibold text-sumi-800 mb-1">Pickup Name *</label>
+                        <input type="text" id="customer-name" required placeholder="e.g., Alex Morgan" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-aka-600">
+                    </div>
+                    <div>
+                        <label for="customer-phone" class="block text-xs font-semibold text-sumi-800 mb-1">Phone Number *</label>
+                        <input type="tel" id="customer-phone" required placeholder="(253) 555-0199" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-aka-600">
+                    </div>
+                    <div>
+                        <label for="order-notes" class="block text-xs font-semibold text-sumi-800 mb-1">Special Instructions (Optional)</label>
+                        <input type="text" id="order-notes" placeholder="Extra teriyaki sauce, utensils, spicy..." class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-cream-300 text-sm focus:outline-none focus:border-aka-600">
+                    </div>
+
+                    <!-- Totals -->
+                    <div class="bg-cream-100 p-4 rounded-xl border border-cream-300 space-y-1.5 text-sm">
+                        <div class="flex justify-between text-sumi-700">
+                            <span>Subtotal</span>
+                            <span id="cart-subtotal">$0.00</span>
+                        </div>
+                        <div class="flex justify-between text-sumi-700">
+                            <span>WA Sales Tax (10.1%)</span>
+                            <span id="cart-tax">$0.00</span>
+                        </div>
+                        <div class="flex justify-between font-bold text-base text-sumi-950 pt-1.5 border-t border-cream-300">
+                            <span>Estimated Total (Pay at Pickup)</span>
+                            <span id="cart-total" class="text-aka-600">$0.00</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="place-order-btn" class="w-full bg-aka-600 hover:bg-aka-700 text-cream-50 font-bold py-3.5 rounded-xl shadow-md transition-colors cursor-pointer">
+                        Place Pickup Order
+                    </button>
+                </form>
+
+                <!-- Order Confirmation State -->
+                <div id="order-confirmation" class="hidden text-center py-6 space-y-3">
+                    <div class="w-14 h-14 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto text-2xl">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <h4 class="font-serif text-2xl font-bold text-sumi-950">Order Received!</h4>
+                    <p id="confirmation-details" class="text-sm text-sumi-700 leading-relaxed"></p>
+                    <p class="text-xs text-sumi-700 bg-cream-100 p-3 rounded-xl border border-cream-300">
+                        Pickup Location: <strong>841 Central Ave N #101, Kent, WA 98032</strong><br>
+                        Questions? Call us at <strong>(253) 854-0667</strong>
+                    </p>
+                    <button onclick="resetOrderModal()" class="mt-2 px-6 py-2.5 rounded-xl bg-sumi-950 text-cream-50 text-sm font-semibold cursor-pointer">
+                        Done
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Menu Filtering, Mobile Menu, Clipboard, and Interactive Pickup Cart -->
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Mobile Navigation Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        function closeMobileMenu() {
+            mobileMenu.classList.add('hidden');
+        }
+
+        // Menu Category Filtering
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const menuCards = document.querySelectorAll('.menu-card');
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update button styles
+                filterButtons.forEach(b => {
+                    b.classList.remove('bg-sumi-950', 'text-cream-50', 'shadow-sm');
+                    b.classList.add('bg-cream-50', 'text-sumi-800', 'border', 'border-cream-300');
+                });
+                btn.classList.remove('bg-cream-50', 'text-sumi-800', 'border', 'border-cream-300');
+                btn.classList.add('bg-sumi-950', 'text-cream-50', 'shadow-sm');
+
+                const filter = btn.getAttribute('data-filter');
+                menuCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Toast Notification Helper
+        let toastTimeout;
+        function showToast(message) {
+            const toastBox = document.getElementById('toast-box');
+            const toastMessage = document.getElementById('toast-message');
+            toastMessage.textContent = message;
+            toastBox.classList.remove('translate-y-24', 'opacity-0');
+            
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toastBox.classList.add('translate-y-24', 'opacity-0');
+            }, 3000);
+        }
+
+        // Copy Address using execCommand fallback for compatibility
+        function copyAddress() {
+            const address = "841 Central Ave N #101, Kent, WA 98032";
+            const tempInput = document.createElement("input");
+            tempInput.value = address;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            try {
+                document.execCommand("copy");
+                const label = document.getElementById('copy-address-text');
+                label.textContent = "Address Copied!";
+                showToast("Copied: 841 Central Ave N #101, Kent, WA");
+                setTimeout(() => {
+                    label.textContent = "Copy Address";
+                }, 2500);
+            } catch (err) {
+                showToast("841 Central Ave N #101, Kent, WA 98032");
+            }
+            document.body.removeChild(tempInput);
+        }
+
+        // Interactive Pickup Cart State
+        let cart = [
+            { name: 'Chicken Teriyaki', price: 13.99, qty: 1 }
+        ];
+
+        function updateCartUI() {
+            const container = document.getElementById('cart-items-container');
+            const badge = document.getElementById('nav-cart-badge');
+            const subtotalEl = document.getElementById('cart-subtotal');
+            const taxEl = document.getElementById('cart-tax');
+            const totalEl = document.getElementById('cart-total');
+
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            if (totalItems > 0) {
+                badge.textContent = totalItems;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+
+            if (cart.length === 0) {
+                container.innerHTML = `<p class="text-sm text-sumi-700 italic py-3 text-center bg-cream-100 rounded-xl">Your order is currently empty. Add items above!</p>`;
+                subtotalEl.textContent = "$0.00";
+                taxEl.textContent = "$0.00";
+                totalEl.textContent = "$0.00";
+                return;
+            }
+
+            container.innerHTML = cart.map((item, idx) => `
+                <div class="flex items-center justify-between bg-white px-3.5 py-2.5 rounded-xl border border-cream-300 text-sm">
+                    <div>
+                        <span class="font-semibold text-sumi-950 block">${item.name}</span>
+                        <span class="text-xs text-sumi-700">$${item.price.toFixed(2)} each</span>
+                    </div>
+                    <div class="flex items-center gap-2.5">
+                        <button type="button" onclick="changeQty(${idx}, -1)" class="w-7 h-7 rounded-lg bg-cream-200 hover:bg-cream-300 font-bold text-sumi-900 cursor-pointer">-</button>
+                        <span class="font-bold w-4 text-center">${item.qty}</span>
+                        <button type="button" onclick="changeQty(${idx}, 1)" class="w-7 h-7 rounded-lg bg-cream-200 hover:bg-cream-300 font-bold text-sumi-900 cursor-pointer">+</button>
+                    </div>
+                </div>
+            `).join('');
+
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const tax = subtotal * 0.101;
+            const total = subtotal + tax;
+
+            subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+            taxEl.textContent = `$${tax.toFixed(2)}`;
+            totalEl.textContent = `$${total.toFixed(2)}`;
+        }
+
+        function addToCart(name, price) {
+            const existing = cart.find(item => item.name === name);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ name, price, qty: 1 });
+            }
+            updateCartUI();
+            showToast(`Added ${name} to your pickup order`);
+        }
+
+        function changeQty(index, delta) {
+            cart[index].qty += delta;
+            if (cart[index].qty <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartUI();
+        }
+
+        function openOrderModal() {
+            updateCartUI();
+            const modal = document.getElementById('order-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeOrderModal() {
+            const modal = document.getElementById('order-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function submitPickupOrder(e) {
+            e.preventDefault();
+            if (cart.length === 0) {
+                showToast("Please add at least one item to your order.");
+                return;
+            }
+            const name = document.getElementById('customer-name').value.trim();
+            const total = document.getElementById('cart-total').textContent;
+
+            document.getElementById('pickup-form').classList.add('hidden');
+            const confirmBox = document.getElementById('order-confirmation');
+            const confirmDetails = document.getElementById('confirmation-details');
+            confirmDetails.innerHTML = `Thank you, <strong>${name}</strong>! Your pickup order (${total}) has been sent to our Kent kitchen and will be ready in approximately <strong>15–20 minutes</strong>.`;
+            confirmBox.classList.remove('hidden');
+        }
+
+        function resetOrderModal() {
+            cart = [];
+            updateCartUI();
+            document.getElementById('pickup-form').reset();
+            document.getElementById('pickup-form').classList.remove('hidden');
+            document.getElementById('order-confirmation').classList.add('hidden');
+            closeOrderModal();
+        }
+
+        // Initialize badge on load
+        updateCartUI();
+    </script>
+</body>
+</html>
